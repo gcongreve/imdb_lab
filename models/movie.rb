@@ -38,19 +38,9 @@ class Movie
   end
 
   def remaining_budget()
-    def stars()
-      sql = "SELECT stars.fee FROM stars
-      INNER JOIN castings
-      ON star_id = stars.id
-      WHERE movie_id = $1"
-      values = [@id]
-      fees = SqlRunner.run(sql, values)
-      fee = fees.first
-      # stars = stars_hash.map { |star| Star.new(star)}
-      # fee = stars.first['fee']
-      binding.pry
-      @budget -= fee.to_int
-    end
+    sql = ""
+    values = [@id]
+
   end
 
 end

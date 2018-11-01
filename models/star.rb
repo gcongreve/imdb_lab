@@ -17,4 +17,23 @@ RETURNING id;"
     @id = id['id'].to_i
   end
 
+  def self.all()
+    sql = "SELECT * FROM stars"
+    stars_hash = SqlRunner.run(sql)
+    star = stars_hash.map { |stars| Movie.new(stars)}
+    return star
+  end
+
+  def movies()
+    sql = "SELECT movies.* FROM movies
+    INNER JOIN castings
+    ON movie_id = movies.id
+    WHERE star_id = $1"
+    values = [@id]
+    movies_hash = SqlRunner.run(sql, values)
+    return movies_hash.map { |movie| Movie.new(movie)}
+  end
+
+
+
 end

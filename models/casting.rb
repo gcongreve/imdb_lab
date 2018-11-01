@@ -18,4 +18,11 @@ RETURNING id;"
     @id = id['id'].to_i
   end
 
+  def self.all()
+    sql = "SELECT * FROM castings"
+    castings_hash = SqlRunner.run(sql)
+    castings = castings_hash.map { |casting| Movie.new(casting)}
+    return castings  
+  end
+
 end

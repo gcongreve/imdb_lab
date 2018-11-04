@@ -38,9 +38,13 @@ class Movie
   end
 
   def remaining_budget()
-    sql = ""
+    sql = "SELECT fee FROM castings
+    WHERE movie_id = $1;"
     values = [@id]
-
+    fees_hash = SqlRunner.run(sql, values)
+    fees = fees_hash.map { |fee| fee['fee']  }
+    total_fee = fees.each { |fee| @budget -= fee.to_i}
+    return @budget
   end
 
 end
